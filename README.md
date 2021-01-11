@@ -19,9 +19,9 @@ reflecting the paper. Comments in code reflect citations from the paper. Framewo
 ## Example
 
 <p align="center">
-<img src="other/example_content.jpg" width=330>
-<img src="other/example_style.jpg" width=200>
-<img src="other/example_generated.jpg"width=330>
+<img src="other/example_content.jpg" width=300>
+<img src="other/example_style.jpg" width=185>
+<img src="other/example_generated.jpg"width=300>
 </p>
 
 ## Citation
