@@ -13,8 +13,16 @@ This is an unofficial implementation of the paper:
 
 
 Effort has been put to provide an implementation as similar as possible to the one described in the paper.
-Code is made easy to follow and understand, with variable naming conventions
+Code is made easy to follow and understand, with naming conventions
 reflecting the paper. Comments in code reflect citations from the paper. Framework of choice is PyTorch.
+
+## Example
+
+<p align="center">
+<img src="other/example_content.jpg" width=330>
+<img src="other/example_style.jpg" width=200>
+<img src="other/example_generated.jpg"width=330>
+</p>
 
 ## Citation
 
