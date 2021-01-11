@@ -1,12 +1,9 @@
-import torch.nn as nn
-from torchvision import models
-import utils as utils
 import torch
+import torch.nn as nn
+import utils as utils
+from torchvision import models
 
-normalization_mean = [0.485, 0.456, 0.406]
-normalization_std = [0.229, 0.224, 0.225]
-
-
+#Reflects the naming convention used in the paper
 layer_name_to_id = {"conv1_1" : 0,
                     "relu1_1" : 1,
                     "conv1_2" : 2,
@@ -96,8 +93,8 @@ class vgg19(nn.Module):
 
     def get_Ns_and_Ms(self, x, layers):
         """
-        Ns represent an array of distinct filter counts in each selected layer of the VGG network used for style extraction .
-        Ms represent an array of height times the width of those filters
+        Ns represent an array of distinct filter counts in each selected layer of the VGG network used for style extraction.
+        Ms represent an array of height times the width of those filters.
         These values are used in regularizing the layer's style loss in later steps and are precalculated here.
         """
 
@@ -112,6 +109,13 @@ class vgg19(nn.Module):
         self.vgg(x_norm)
 
     def normalize_tensor(tensor):
+        """
+        Pytorch VGG pre-trained model expects input images normalized to ImageNet standards
+        """
+
+        normalization_mean = [0.485, 0.456, 0.406]
+        normalization_std = [0.229, 0.224, 0.225]
+
         mean = torch.tensor(normalization_mean).cuda().view(-1, 1, 1)
         std = torch.tensor(normalization_std).cuda().view(-1, 1, 1)
         return (tensor - mean) / std

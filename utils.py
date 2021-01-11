@@ -13,12 +13,19 @@ def get_gram_matrix(tensor):
     G = torch.mm(tensor,tensor.t())
     return G
 
-def img_to_tensor(img, device):
+def img_to_tensor(img, device, target_height, target_width=None):
     """
     Converting a PIL image to a tensor with an appropriate shape
     """
+
+    w,h = img.size
+
+    #Keeps ascpect ratio if width not specified
+    if target_width==None:
+        target_width= int(( w / h ) * target_height)
+
     loader = transforms.Compose([
-        transforms.Resize(512),
+        transforms.Resize((target_height,target_width)),
         transforms.ToTensor(),
     ])
 
