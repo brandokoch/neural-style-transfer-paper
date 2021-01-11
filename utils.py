@@ -1,11 +1,8 @@
 import torch
-from PIL import Image
 from torchvision import transforms
-import cv2
-import numpy as np
 
-IMAGENET_MEAN_255 = [123.675, 116.28, 103.53]
-IMAGENET_STD_NEUTRAL = [1, 1, 1]
+
+
 
 def get_gram_matrix(tensor):
     """
@@ -16,33 +13,26 @@ def get_gram_matrix(tensor):
     G = torch.mm(tensor,tensor.t())
     return G
 
-def preprocess_image(path, device, target_height, target_width=None):
+def img_to_tensor(img, device):
     """
-    Converting the image to a tensor with the appropriate shape
+    Converting a PIL image to a tensor with an appropriate shape
     """
-
-    img = Image.open(path)
-    w,h = img.size
-
-    #Keeps ascpect ratio if width not specified
-    if target_width==None:
-        target_width= int(( w / h ) * target_height)
-
     loader = transforms.Compose([
-        transforms.PILToTensor(),
-        transforms.Resize((target_height, target_width)),
-        transforms.Lambda(lambda x: x.float()),
-        # transforms.Lambda(lambda x: x.mul(1./255.)), # Worked better with [0, 255] range
-        transforms.Normalize(mean=IMAGENET_MEAN_255, std=IMAGENET_STD_NEUTRAL)
+        transforms.Resize(512),
+        transforms.ToTensor(),
     ])
 
-    img = loader(img).to(device).unsqueeze(0)
+    img = loader(img).unsqueeze(0)
+    img = img.to(device, dtype=torch.float)
     return img
 
-def save_img(path, img):
-    img = img.squeeze().to('cpu').detach().numpy()
-    img = img.copy()
-    img = np.moveaxis(img, 0, 2)
-    img = img + np.array(IMAGENET_MEAN_255).reshape((1,1,3))
-    img = np.clip(img, 0, 255).astype('uint8')
-    cv2.imwrite(path,  img[:, :, ::-1])
+def tensor_to_img(tensor):
+    """
+    Converting a tensor to a PIL image
+    """
+    unloader=transforms.ToPILImage()
+
+    img=tensor.cpu().clone().squeeze(0)
+    img=unloader(img)
+
+    return img

@@ -1,6 +1,11 @@
 import torch.nn as nn
 from torchvision import models
 import utils as utils
+import torch
+
+normalization_mean = [0.485, 0.456, 0.406]
+normalization_std = [0.229, 0.224, 0.225]
+
 
 layer_name_to_id = {"conv1_1" : 0,
                     "relu1_1" : 1,
@@ -44,7 +49,7 @@ layer_name_to_id = {"conv1_1" : 0,
 class vgg19(nn.Module):
     def __init__(self, device):
         super().__init__()
-        self.vgg = models.vgg19(pretrained=True).to(device).features
+        self.vgg = models.vgg19(pretrained=True).features.to(device).eval()
         self.switch_to_avgpool()
 
         for param in self.vgg.parameters():
@@ -70,7 +75,8 @@ class vgg19(nn.Module):
         content = activations.squeeze().view(activations.shape[1],-1)
 
         if detach:
-            content.detach()
+            content=content.detach()
+            return content
 
         return content
 
@@ -102,4 +108,10 @@ class vgg19(nn.Module):
         return Ns, Ms
 
     def forward(self,x):
-        self.vgg(x)
+        x_norm=self.normalize_tensor(x)
+        self.vgg(x_norm)
+
+    def normalize_tensor(tensor):
+        mean = torch.tensor(normalization_mean).cuda().view(-1, 1, 1)
+        std = torch.tensor(normalization_std).cuda().view(-1, 1, 1)
+        return (tensor - mean) / std
