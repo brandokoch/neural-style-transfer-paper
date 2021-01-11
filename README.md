@@ -15,3 +15,20 @@ This is an unofficial implementation of the paper:
 Effort has been put to provide an implementation as similar as possible to the one described in the paper.
 Code is made easy to follow and understand, with variable naming conventions
 reflecting the paper. Comments in code reflect citations from the paper. Framework of choice is PyTorch.
+
+## Citation
+
+```
+@misc{Koch2020nstpaper,
+  author = {Koch, Brando},
+  title = {neural-style-transfer-paper},
+  year = {2021},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+  howpublished = {\url{https://github.com/bkoch4142/neural-style-transfer-paper}},
+}
+```
+
+## License
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/bkoch4142/neural-style-transfer-paper/blob/master/LICENSE)
