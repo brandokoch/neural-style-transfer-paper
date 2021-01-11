@@ -16,6 +16,12 @@ Effort has been put to provide an implementation as similar as possible to the o
 Code is made easy to follow and understand, with naming conventions
 reflecting the paper. Comments in code reflect citations from the paper. Framework of choice is PyTorch.
 
+## Architecture
+
+<p align="center">
+<img src="other/graph.png" width=700>
+</p>
+
 ## Example
 
 <p align="center">
