@@ -6,7 +6,7 @@ L. A. Gatys, A. S. Ecker and M. Bethge, "Image Style Transfer Using Convolutiona
 
 <a href=https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/Gatys_Image_Style_Transfer_CVPR_2016_paper.pdf>
   <p align="center">
-    <img width="540" height="650" src="./other/paper.jpg">
+    <img width="540" height="700" src="./other/paper.jpg">
   </p>
 </a>
 
