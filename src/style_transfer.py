@@ -16,7 +16,7 @@ def style_transfer(args):
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # We used a 19-layer VGG network
+    # We used a 19-layer VGG network as content and style extractor
     model = vgg19(device)
 
     # Content image resized to keep aspect ratio
@@ -63,12 +63,11 @@ def style_transfer(args):
             loss.backward()
             return loss
 
-        print('Iter: {} \t '.format(cnt), end='') #fixme
+        print('#### Iteration: {}'.format(cnt))
         loss= optimizer.step(closure)
         losses.append(loss)
 
     generated_image.data.clamp_(0, 1)
-
 
     # Storing the generated image
     timestr = time.strftime("%Y%m%d-%H%M%S")
@@ -87,18 +86,20 @@ if __name__=="__main__":
 
     parser=argparse.ArgumentParser()
 
-    parser.add_argument("--content_image_pth", type=str, default="data/content_images/tuebingen_neckarfront.jpg")
-    parser.add_argument("--style_image_pth", type=str, default="data/style_images/gogh2.jpg")
-    parser.add_argument("--image_height", type=int, default=512)
-    parser.add_argument("--image_width", type=int, required=False, default=None) # Aspect ratio kept if not specified
+    parser.add_argument("--content_image_pth", type=str, help="Path to content image", default="data/content_images/tuebingen_neckarfront.jpg")
+    parser.add_argument("--style_image_pth", type=str, help="Path to style image", default="data/style_images/gogh2.jpg")
 
-    parser.add_argument("--content_weight", type=float, default=1)
-    parser.add_argument("--style_weight", type=float, default=1e7)
+    parser.add_argument("--image_height", type=int, help="Target image height", default=512)
+    parser.add_argument("--image_width", type=int, help="Target image width", required=False, default=None) # Aspect ratio kept if not specified
+    parser.add_argument("--from_noise", type=bool, help="Determines if the target image is constructed from noise or from the content image", default=True)
 
-    parser.add_argument("--content_layer_name", type=str, default="conv3_2")
-    parser.add_argument("--style_layer_names", type=list, default=["conv1_1", "conv2_1", "conv3_1", "conv4_1", "conv5_1"])
+    parser.add_argument("--content_weight", type=float, help="Loss weight for the content representation", default=1)
+    parser.add_argument("--style_weight", type=float, help="Loss weight for the style representation", default=1e7)
 
-    parser.add_argument("--iter_count", type=bool, default=30)
+    parser.add_argument("--content_layer_name", type=str, help="Neural network layer to use to extract the content represenation", default="conv3_2")
+    parser.add_argument("--style_layer_names", type=str, nargs='+', help="Neural network layers to use to extract the style represenation", default=["conv1_1", "conv2_1", "conv3_1", "conv4_1", "conv5_1"])
+
+    parser.add_argument("--iter_count", type=int, help="Optimizer iteration count", default=5)
     parser.add_argument("--optimizer", type=str, choices=['lbfgs'], default='lbfgs')
 
     args = parser.parse_args()

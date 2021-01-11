@@ -2,6 +2,7 @@ import torch
 import numpy as np
 import torch.nn.functional as F
 
+
 def get_content_loss(content_image_content, generated_image_content):
     """
     The mean squared difference between the activations of the generated image and activations of the content
@@ -9,6 +10,7 @@ def get_content_loss(content_image_content, generated_image_content):
     """
     content_loss=F.mse_loss(content_image_content, generated_image_content)
     return content_loss
+
 
 def get_style_loss(style_image_style, generated_image_style, Ns, Ms):
     """
@@ -21,7 +23,7 @@ def get_style_loss(style_image_style, generated_image_style, Ns, Ms):
 
     layer_weight = np.full(len(style_image_style),1/len(style_image_style))
 
-    layer_count=len(style_image_style)
+    layer_count = len(style_image_style)
     for i in range(layer_count):
         multiplier = ( 1 / (4 * (Ns[i]**2) * (Ms[i]**2)) )
         layer_style_loss = multiplier * F.mse_loss(style_image_style[i], generated_image_style[i])
@@ -43,12 +45,12 @@ def make_loss(content_weight, style_weight, content_image_content, style_image_s
         content image
         """
 
-        content_loss= content_loss_fn(content_image_content, generated_image_content )
-        style_loss= style_loss_fn(style_image_style, generated_image_style,Ns, Ms)
+        content_loss = content_loss_fn(content_image_content, generated_image_content )
+        style_loss = style_loss_fn(style_image_style, generated_image_style,Ns, Ms)
 
         weighted_content_loss = content_weight * content_loss
         weighted_style_loss = style_weight * style_loss
-        total_loss= weighted_content_loss + weighted_style_loss
+        total_loss = weighted_content_loss + weighted_style_loss
 
         with torch.no_grad():
             print("Loss: {:.4f}, \t "

@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import utils as utils
+from src import utils as utils
 from torchvision import models
 
 #Reflects the naming convention used in the paper
@@ -104,11 +104,11 @@ class vgg19(nn.Module):
 
         return Ns, Ms
 
-    def forward(self,x):
-        x_norm=self.normalize_tensor(x)
+    def forward(self, x):
+        x_norm=self.normalize(x)
         self.vgg(x_norm)
 
-    def normalize_tensor(tensor):
+    def normalize(self, x):
         """
         Pytorch VGG pre-trained model expects input images normalized to ImageNet standards
         """
@@ -118,4 +118,4 @@ class vgg19(nn.Module):
 
         mean = torch.tensor(normalization_mean).cuda().view(-1, 1, 1)
         std = torch.tensor(normalization_std).cuda().view(-1, 1, 1)
-        return (tensor - mean) / std
+        return (x - mean) / std
