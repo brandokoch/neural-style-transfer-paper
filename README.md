@@ -11,7 +11,6 @@ This is an unofficial implementation of the paper:
 </a>
 
 
-
 Effort has been put to provide an implementation as similar as possible to the one described in the paper.
 Code is made easy to follow and understand, with naming conventions
 reflecting the paper. Comments in code reflect citations from the paper. Framework of choice is PyTorch.
