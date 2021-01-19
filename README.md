@@ -57,7 +57,7 @@ bash scripts/content_reconstruction.sh
 For more examples see the images inside the output folder along with their log files for reproducibility.
 
 ## Tips
-- Style transfer is highly sensitive to the chosen content representation and style representation layers
+Style transfer is highly sensitive to the chosen content representation and style representation layers
 as well as to the style and content weights so be sure to experiment with those in order to get an appealing result. 
 Reasonable parameter values are already set as defaults. 
 
