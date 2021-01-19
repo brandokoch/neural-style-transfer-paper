@@ -5,7 +5,6 @@ python src/style_transfer.py \
     --style_image_pth data/style_images/gogh2.jpg \
     --image_height 512 \
     --image_width 512 \
-    --from_noise True \
     --content_weight 0 \
     --style_weight 1e7 \
     --content_layer_name conv3_2 \

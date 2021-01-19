@@ -29,6 +29,7 @@ def style_transfer(args):
     # Generated image should be same shape as content image
     generated_image = torch.randn(content_image.data.size(), device=device,  requires_grad=True)
 
+
     # The content image is passed through the network and the content representation in one layer is stored.
     # The style image is passed through the network and its style representation on all layers included are computed
     # and stored.
@@ -86,12 +87,11 @@ if __name__=="__main__":
 
     parser=argparse.ArgumentParser()
 
-    parser.add_argument("--content_image_pth", type=str, help="Path to content image", default="data/content_images/tuebingen_neckarfront.jpg")
-    parser.add_argument("--style_image_pth", type=str, help="Path to style image", default="data/style_images/gogh2.jpg")
+    parser.add_argument("--content_image_pth", type=str, help="Path to content image", default="../data/content_images/tuebingen_neckarfront.jpg")
+    parser.add_argument("--style_image_pth", type=str, help="Path to style image", default="../data/style_images/gogh2.jpg")
 
     parser.add_argument("--image_height", type=int, help="Target image height", default=512)
     parser.add_argument("--image_width", type=int, help="Target image width", required=False, default=None) # Aspect ratio kept if not specified
-    parser.add_argument("--from_noise", type=bool, help="Determines if the target image is constructed from noise or from the content image", default=True)
 
     parser.add_argument("--content_weight", type=float, help="Loss weight for the content representation", default=1)
     parser.add_argument("--style_weight", type=float, help="Loss weight for the style representation", default=1e7)
