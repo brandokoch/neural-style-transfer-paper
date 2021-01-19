@@ -24,7 +24,7 @@ reflecting the paper. Comments in code reflect citations from the paper. Framewo
 
 ## Usage
 Along with style transfer the code is flexible enough to also perform style and content reconstruction
-from a white noise image by setting either the content weight or the style weight to 0
+from a white noise image by setting either the content weight or the style weight to zero.
 
 
 Style Transfer:
@@ -53,7 +53,7 @@ For more examples see the images inside the output folder along with their log f
 ## Tips
 - Style transfer is highly sensitive to the chosen content representation and style representation layers
 as well as to the style and content weights so be sure to experiment with those in order to get an appealing result. 
-Reasonable parameter values are already set as defaults 
+Reasonable parameter values are already set as defaults. 
 
 ## Citation
 Please use this bibtex if you want to cite this repository:
