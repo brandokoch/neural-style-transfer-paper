@@ -1,0 +1,15 @@
+name: neural-style-transfer
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - cudatoolkit=11.0.221
+  - matplotlib=3.3.2
+  - numpy=1.19.2
+  - pip=20.2.4
+  - pillow=8.0.1
+  - python=3.8.5
+  - pytorch=1.7.0
+  - torchvision=0.8.1
+

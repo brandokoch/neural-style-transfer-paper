@@ -22,6 +22,12 @@ reflecting the paper. Comments in code reflect citations from the paper. Framewo
 <img src="other/graph.png" width=700>
 </p>
 
+## Setup 
+Using Miniconda/Anaconda:
+1. `cd path_to_repo`
+2. `conda env create`
+3. `conda activate neural-style-transfer`
+
 ## Usage
 Along with style transfer the code is flexible enough to also perform style and content reconstruction
 from a white noise image by setting either the content weight or the style weight to zero.
