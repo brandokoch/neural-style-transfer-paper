@@ -45,12 +45,10 @@ Content Reconstruction:
 bash scripts/content_reconstruction.sh
 ```
 
-## Example
+## Examples
 
 <p align="center">
-<img src="other/example_content.jpg" width=300>
-<img src="other/example_style.jpg" width=185>
-<img src="other/example_generated.jpg"width=300>
+<img src="other/examples.jpg">
 </p>
 
 For more examples see the images inside the output folder along with their log files for reproducibility.
